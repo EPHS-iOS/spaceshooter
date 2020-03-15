@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7152153240DD57000289FC0 /* MyTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7152152240DD57000289FC0 /* MyTileSet.sks */; };
+		B71521552410016000289FC0 /* Start.sks in Resources */ = {isa = PBXBuildFile; fileRef = B71521542410016000289FC0 /* Start.sks */; };
+		B71521572410019300289FC0 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71521562410019300289FC0 /* Start.swift */; };
+		B715215A241BD8EC00289FC0 /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7152159241BD8EC00289FC0 /* GameCenter.swift */; };
+		B715215D241BDB4100289FC0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B715215C241BDB4100289FC0 /* GameKit.framework */; };
+		B719F2FF241D7DFB0019DB25 /* FancyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B719F2FE241D7DFB0019DB25 /* FancyButton.swift */; };
+		B74B91C123FEE07500D847B6 /* Ship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74B91C023FEE07500D847B6 /* Ship.swift */; };
 		B78A02FE23F45E8E00724932 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78A02FD23F45E8E00724932 /* AppDelegate.swift */; };
 		B78A030023F45E8E00724932 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B78A02FF23F45E8E00724932 /* GameScene.sks */; };
 		B78A030223F45E8E00724932 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = B78A030123F45E8E00724932 /* Actions.sks */; };
@@ -17,6 +24,8 @@
 		B78A030E23F45E9500724932 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B78A030C23F45E9500724932 /* LaunchScreen.storyboard */; };
 		B78A031923F45E9500724932 /* spaceshooterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78A031823F45E9500724932 /* spaceshooterTests.swift */; };
 		B78A032423F45E9500724932 /* spaceshooterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78A032323F45E9500724932 /* spaceshooterUITests.swift */; };
+		B78A033223F4601800724932 /* TLAnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78A033123F4601700724932 /* TLAnalogJoystick.swift */; };
+		B7C9B4A524043067004EB458 /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = B7C9B4A424043067004EB458 /* Fire.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +46,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B7152152240DD57000289FC0 /* MyTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyTileSet.sks; sourceTree = "<group>"; };
+		B71521542410016000289FC0 /* Start.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Start.sks; sourceTree = "<group>"; };
+		B71521562410019300289FC0 /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
+		B7152159241BD8EC00289FC0 /* GameCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
+		B715215C241BDB4100289FC0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		B719F2FE241D7DFB0019DB25 /* FancyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyButton.swift; sourceTree = "<group>"; };
+		B74B91C023FEE07500D847B6 /* Ship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ship.swift; sourceTree = "<group>"; };
 		B78A02FA23F45E8E00724932 /* spaceshooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spaceshooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B78A02FD23F45E8E00724932 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B78A02FF23F45E8E00724932 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -53,6 +69,8 @@
 		B78A031F23F45E9500724932 /* spaceshooterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = spaceshooterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B78A032323F45E9500724932 /* spaceshooterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spaceshooterUITests.swift; sourceTree = "<group>"; };
 		B78A032523F45E9500724932 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B78A033123F4601700724932 /* TLAnalogJoystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLAnalogJoystick.swift; sourceTree = "<group>"; };
+		B7C9B4A424043067004EB458 /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B715215D241BDB4100289FC0 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B715215B241BDB4100289FC0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B715215C241BDB4100289FC0 /* GameKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B78A02F123F45E8E00724932 = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +114,7 @@
 				B78A031723F45E9500724932 /* spaceshooterTests */,
 				B78A032223F45E9500724932 /* spaceshooterUITests */,
 				B78A02FB23F45E8E00724932 /* Products */,
+				B715215B241BDB4100289FC0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,11 +135,19 @@
 				B78A02FF23F45E8E00724932 /* GameScene.sks */,
 				B78A030123F45E8E00724932 /* Actions.sks */,
 				B78A030323F45E8E00724932 /* GameScene.swift */,
+				B74B91C023FEE07500D847B6 /* Ship.swift */,
 				B78A030523F45E8E00724932 /* GameViewController.swift */,
 				B78A030723F45E8E00724932 /* Main.storyboard */,
 				B78A030A23F45E9500724932 /* Assets.xcassets */,
+				B78A033123F4601700724932 /* TLAnalogJoystick.swift */,
 				B78A030C23F45E9500724932 /* LaunchScreen.storyboard */,
 				B78A030F23F45E9500724932 /* Info.plist */,
+				B7C9B4A424043067004EB458 /* Fire.sks */,
+				B7152152240DD57000289FC0 /* MyTileSet.sks */,
+				B71521542410016000289FC0 /* Start.sks */,
+				B71521562410019300289FC0 /* Start.swift */,
+				B7152159241BD8EC00289FC0 /* GameCenter.swift */,
+				B719F2FE241D7DFB0019DB25 /* FancyButton.swift */,
 			);
 			path = spaceshooter;
 			sourceTree = "<group>";
@@ -241,7 +277,10 @@
 				B78A030923F45E8E00724932 /* Main.storyboard in Resources */,
 				B78A030023F45E8E00724932 /* GameScene.sks in Resources */,
 				B78A030B23F45E9500724932 /* Assets.xcassets in Resources */,
+				B7152153240DD57000289FC0 /* MyTileSet.sks in Resources */,
+				B7C9B4A524043067004EB458 /* Fire.sks in Resources */,
 				B78A030E23F45E9500724932 /* LaunchScreen.storyboard in Resources */,
+				B71521552410016000289FC0 /* Start.sks in Resources */,
 				B78A030223F45E8E00724932 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,8 +307,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B78A030423F45E8E00724932 /* GameScene.swift in Sources */,
+				B719F2FF241D7DFB0019DB25 /* FancyButton.swift in Sources */,
 				B78A030623F45E8E00724932 /* GameViewController.swift in Sources */,
 				B78A02FE23F45E8E00724932 /* AppDelegate.swift in Sources */,
+				B78A033223F4601800724932 /* TLAnalogJoystick.swift in Sources */,
+				B71521572410019300289FC0 /* Start.swift in Sources */,
+				B715215A241BD8EC00289FC0 /* GameCenter.swift in Sources */,
+				B74B91C123FEE07500D847B6 /* Ship.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,13 +487,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 883DK65VTV;
 				INFOPLIST_FILE = spaceshooter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.spaceshooter;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.nathaniel.spacegame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -461,13 +506,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 883DK65VTV;
 				INFOPLIST_FILE = spaceshooter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = test.spaceshooter;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.nathaniel.spacegame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

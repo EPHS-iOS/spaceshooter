@@ -9,37 +9,50 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GameKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, GKGameCenterControllerDelegate {
+    
+    
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        if let scene = GKScene(fileNamed: "GameScene") {
-            
-            // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
-                
-                // Copy gameplay related content over to the scene
-                sceneNode.entities = scene.entities
-                sceneNode.graphs = scene.graphs
-                
-                // Set the scale mode to scale to fit the window
-                sceneNode.scaleMode = .aspectFill
-                
-                // Present the scene
-                if let view = self.view as! SKView? {
-                    view.presentScene(sceneNode)
+        GameCenter.shared.viewController = self
+        NotificationCenter.default.addObserver(self, selector: #selector(showLeaderboard), name: NSNotification.Name(rawValue: "showLeaderboard"), object: nil)
+        if let view = self.view as! SKView? {
+                // Load the SKScene from 'GameScene.sks'
+            let store = UserDefaults.standard
+            store.setValue(nil, forKey: "Score")
+                if let scene = SKScene(fileNamed: "Start") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFill
                     
-                    view.ignoresSiblingOrder = true
-                    
-                    view.showsFPS = true
-                    view.showsNodeCount = true
+                    // Present the scene
+                    view.presentScene(scene)
                 }
+                
+                view.ignoresSiblingOrder = true
+                view.showsPhysics = false
+                view.showsFPS = false
+                view.showsNodeCount = false
+                
             }
-        }
+    }
+
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    @objc func showLeaderboard(){
+       
+        let gcViewController = GKGameCenterViewController()
+        gcViewController.gameCenterDelegate = self
+        gcViewController.viewState = GKGameCenterViewControllerState.leaderboards
+        gcViewController.leaderboardIdentifier = "edu.nathaniel.spacegame.leaderboard"
+        self.showDetailViewController(gcViewController, sender: self)
+        self.navigationController?.pushViewController(gcViewController, animated: true)
+        self.present(gcViewController, animated: true, completion: nil)
     }
 
     override var shouldAutorotate: Bool {
@@ -58,3 +71,4 @@ class GameViewController: UIViewController {
         return true
     }
 }
+
