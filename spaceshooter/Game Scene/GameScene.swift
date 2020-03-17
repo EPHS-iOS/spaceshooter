@@ -88,13 +88,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
         physicsWorld.contactDelegate = self
         
         // Initially spawn enemies
-        for _ in 0 ..< 5 {
+        for _ in 0 ..< 7 {
             spawnenemy()
         }
         //Enemy spawning
         let createenemies = SKAction.repeatForever(SKAction.sequence([SKAction.run {
             self.spawnenemy()
-            } , SKAction.wait(forDuration: 5.0)]))
+            } , SKAction.wait(forDuration: 4.0)]))
         self.run(createenemies)
         //health pack spawning
         let createpowerups = SKAction.repeatForever(SKAction.sequence([SKAction.run {

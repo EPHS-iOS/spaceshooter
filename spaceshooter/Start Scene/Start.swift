@@ -38,7 +38,7 @@ class Start: SKScene{
         return label
     }()
     lazy var leaderboardbutton = FancyButton(imageNamed: "buttonBlue", buttonAction: {
-        if self.canShowLeaderboardButton {
+        if GameCenter.shared.isAuthenticated {
           NotificationCenter.default.post(name: Notification.Name("showLeaderboard"), object: nil)
         } else {
             let alert = UIAlertController(title: "Game Center not connected!", message: "Game Center has not authenticated you yet" , preferredStyle: .alert)
@@ -47,7 +47,6 @@ class Start: SKScene{
         }
     }, size: CGSize(width: 666, height: 117), alpha: 1.0)
     override func sceneDidLoad() {
-        NotificationCenter.default.addObserver(self, selector: #selector(enableLeaderboardButton), name: NSNotification.Name(rawValue: "authenticated"), object: nil)
         scoretext = self.childNode(withName: "scorelabel") as! SKLabelNode
         startbutton.addChild(starttext)
         leaderboardbutton.addChild(leadertext)
@@ -64,9 +63,7 @@ class Start: SKScene{
         
         
     }
-    @objc func enableLeaderboardButton(){
-        canShowLeaderboardButton = true
-    }
+
     
     func transition(){
         if let scene = GKScene(fileNamed: "GameScene") {

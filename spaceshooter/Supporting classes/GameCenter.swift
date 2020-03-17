@@ -13,12 +13,12 @@ class GameCenter {
     
     static let shared = GameCenter()
     var viewController: UIViewController?
-   
+    var isAuthenticated = false
     
     private init() {
         GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
             if GKLocalPlayer.local.isAuthenticated {
-               NotificationCenter.default.post(name: Notification.Name("authenticated"), object: nil)
+                self.isAuthenticated = true
                print("Authenticated to Game Center")
             } else if let vc = gcAuthVC {
                 self.viewController?.present(vc, animated: true)

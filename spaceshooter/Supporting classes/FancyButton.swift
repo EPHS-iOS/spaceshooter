@@ -39,6 +39,7 @@ class FancyButton: SKNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if isEnabled{
             mask.alpha = 0.25
+            run(SKAction.scale(to: 1.05, duration: 0.1))
             isPressed = true
         }
     }
@@ -49,9 +50,11 @@ class FancyButton: SKNode {
                 
                 if button.contains(location){
                     mask.alpha = 0.25
+                    run(SKAction.scale(to: 1.05, duration: 0.1))
                     isPressed = true
                 } else {
                     mask.alpha = 0.0
+                    run(SKAction.scale(to: 1.0, duration: 0.1))
                     isPressed = false
                 }
             }
@@ -64,6 +67,7 @@ class FancyButton: SKNode {
                 let location = touch.location(in: self)
                 if button.contains(location) {
                     mask.alpha = 0.0
+                    run(SKAction.scale(to: 1.0, duration: 0.1))
                     isPressed = false
 //                    disable()
                     action()
