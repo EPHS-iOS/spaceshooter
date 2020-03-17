@@ -18,11 +18,12 @@ class GameCenter {
     private init() {
         GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
             if GKLocalPlayer.local.isAuthenticated {
-               print("Authenticated")
+               NotificationCenter.default.post(name: Notification.Name("authenticated"), object: nil)
+               print("Authenticated to Game Center")
             } else if let vc = gcAuthVC {
                 self.viewController?.present(vc, animated: true)
             } else {
-                print("error")
+                print("Error connecting to Game Center")
             }
             
             

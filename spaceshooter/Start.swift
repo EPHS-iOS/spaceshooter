@@ -14,7 +14,7 @@ import GameplayKit
 class Start: SKScene{
     
     
-    
+    var canShowLeaderboardButton = false
     lazy var startbutton = FancyButton(imageNamed: "buttonBlue", buttonAction: {
         self.transition()
     }, size: CGSize(width: 666, height: 117), alpha: 1.0)
@@ -38,9 +38,16 @@ class Start: SKScene{
         return label
     }()
     lazy var leaderboardbutton = FancyButton(imageNamed: "buttonBlue", buttonAction: {
+        if self.canShowLeaderboardButton {
           NotificationCenter.default.post(name: Notification.Name("showLeaderboard"), object: nil)
+        } else {
+            let alert = UIAlertController(title: "Game Center not connected!", message: "Game Center has not authenticated you yet" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.view?.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        }
     }, size: CGSize(width: 666, height: 117), alpha: 1.0)
     override func sceneDidLoad() {
+        NotificationCenter.default.addObserver(self, selector: #selector(enableLeaderboardButton), name: NSNotification.Name(rawValue: "authenticated"), object: nil)
         scoretext = self.childNode(withName: "scorelabel") as! SKLabelNode
         startbutton.addChild(starttext)
         leaderboardbutton.addChild(leadertext)
@@ -57,6 +64,10 @@ class Start: SKScene{
         
         
     }
+    @objc func enableLeaderboardButton(){
+        canShowLeaderboardButton = true
+    }
+    
     func transition(){
         if let scene = GKScene(fileNamed: "GameScene") {
             
@@ -82,41 +93,6 @@ class Start: SKScene{
             }
         }
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//        guard let location = touches.first?.location(in: self) else { return  }
-//        if startbutton.contains(location) {
-//
-//            if let scene = GKScene(fileNamed: "GameScene") {
-//
-//                // Get the SKScene from the loaded GKScene
-//                if let sceneNode = scene.rootNode as! GameScene? {
-//
-//                    // Copy gameplay related content over to the scene
-//                    sceneNode.entities = scene.entities
-//                    sceneNode.graphs = scene.graphs
-//
-//                    // Set the scale mode to scale to fit the window
-//                    sceneNode.scaleMode = .aspectFill
-//
-//                    // Present the scene
-//                    if let view = self.view as! SKView? {
-//                        view.presentScene(sceneNode, transition: .crossFade(withDuration: 1.0))
-//                        view.ignoresSiblingOrder = true
-//
-//                        view.showsFPS = false
-//                        view.showsNodeCount = false
-//                        view.showsPhysics = false
-//                    }
-//                }
-//            }
-//
-//        } else if leaderboardbutton.contains(location) {
-//
-//            NotificationCenter.default.post(name: Notification.Name("showLeaderboard"), object: nil)
-//        }
-//
-//    }
+
     
 }

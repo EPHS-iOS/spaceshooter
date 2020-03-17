@@ -152,8 +152,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
     
     func canSpawn(position: CGPoint) -> Bool {
         for node in self.children {
-            if node.contains(position) && node.name != "tilemap" {
+            let xDist = position.x - node.position.x
+            let yDist = position.y - node.position.y
+            let Dist = sqrt(xDist * xDist + yDist * yDist)
+            switch node.name {
+            case "meteor", "enemy" :
+                if Dist < 200 {
+                 return false
+                }
+            case "player" :
+                if Dist < 300 {
                 return false
+                }
+            default: break
             }
         }
         return true
@@ -163,11 +174,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
         let enemy = Ship(texture: SKTexture(imageNamed: "enemyRed1.png"), isPlayer: false)
         enemy.position = CGPoint(x: Int.random(in: -2500 ... 2500), y: Int.random(in: -2500 ... 2500))
         enemy.healthbar.position = CGPoint(x: enemy.position.x-(enemy.size.width/2), y: enemy.position.y-60)
-        
+        if canSpawn(position: enemy.position) {
         self.addChild(enemy)
         self.addChild(enemy.healthbar)
         self.enemylist.append(enemy)
-        
+        } else {
+            spawnenemy()
+        }
         
     }
     func spawnhealthkit(){
@@ -177,9 +190,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
             healthkit.position = CGPoint(x: Int.random(in: -2300 ... 2300), y: Int.random(in: -2300 ... 2300))
             healthkit.xScale = 3
             healthkit.yScale = 3
-            
+            if canSpawn(position: healthkit.position) {
             self.healthkitlist.append(healthkit)
             self.addChild(healthkit)
+            } else {
+                spawnhealthkit()
+            }
             
         }
     }

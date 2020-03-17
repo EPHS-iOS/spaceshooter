@@ -63,12 +63,13 @@ class FancyButton: SKNode {
             for touch in touches {
                 let location = touch.location(in: self)
                 if button.contains(location) {
+                    mask.alpha = 0.0
                     isPressed = false
-                    disable()
+//                    disable()
                     action()
-                    run(SKAction.sequence([SKAction.wait(forDuration: 0.1), SKAction.run {
-                        self.enable()
-                        }]))
+//                    run(SKAction.sequence([SKAction.wait(forDuration: 0.1), SKAction.run {
+//                        self.enable()
+//                        }]))
                 }
             }
             
@@ -76,16 +77,16 @@ class FancyButton: SKNode {
         }
     
     }
-    func enable(){
-        isEnabled = true
-        mask.alpha = 0.0
-        
-    }
-    func disable() {
-        isEnabled = false
-        mask.alpha = 0.0
-        
-    }
+//    func enable(){
+//        isEnabled = true
+//        mask.alpha = 0.0
+//
+//    }
+//    func disable() {
+//        isEnabled = false
+//        mask.alpha = 0.0
+//
+//    }
     
     
     
