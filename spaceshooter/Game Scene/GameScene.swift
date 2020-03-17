@@ -41,16 +41,71 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
     let fireeffect1 = SKSpriteNode(imageNamed: "fire03.png")
     let fireeffect2 = SKSpriteNode(imageNamed: "fire03.png")
     override func sceneDidLoad() {
-        
-        ship = Ship(texture: SKTexture(imageNamed: "playerShip1_blue.png"), isPlayer: true)
-        ship.zPosition = 1
         //Importing sprites from GameScene.sks
         healthtext = camera?.childNode(withName: "health") as! SKLabelNode
         scorelabel = camera?.childNode(withName: "scorelabel") as! SKLabelNode
         
+        ship = Ship(texture: SKTexture(imageNamed: "playerShip1_blue.png"), isPlayer: true)
+        ship.zPosition = 1
+        camera?.addChild(ship.healthbar)
+        
+        setButtonPositions()
+        self.addChild(ship)
+        
+        // Show fire effect on ship
+        fireeffect1.position = CGPoint(x: -25, y: -45)
+        fireeffect2.position = CGPoint(x: 25, y: -45)
+        fireeffect1.zRotation = CGFloat.pi
+        fireeffect2.zRotation = CGFloat.pi
+        fireeffect1.alpha = 0.0
+        fireeffect2.alpha = 0.0
+        ship.addChild(fireeffect1)
+        ship.addChild(fireeffect2)
+        
         joystick.handleImage = UIImage(named: "shadedDark01.png")
         joystick.baseImage = UIImage(named: "shadedDark07.png")
         joystick.alpha = 0.5
+        camera?.addChild(joystick)
+        //Joystick movement handlers
+        joystick.on(.move) { [unowned self] joystick in
+            self.isTracking = true
+        }
+        joystick.on(.end) { [unowned self] joystick in
+            self.isTracking = false
+        }
+        
+        camera?.addChild(firebutton)
+        firebutton.addChild(firelabel)
+        
+        //Creating rectangle level border
+        let rect = CGRect(origin: CGPoint(x: -2500, y: -2500), size: CGSize(width: 5000, height: 5000))
+        let borderindicator = SKShapeNode(rect: rect)
+        borderindicator.lineWidth = 50
+        borderindicator.alpha = 0.5
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: rect)
+        self.addChild(borderindicator)
+        
+        physicsWorld.contactDelegate = self
+        
+        // Initially spawn enemies
+        for _ in 0 ..< 5 {
+            spawnenemy()
+        }
+        //Enemy spawning
+        let createenemies = SKAction.repeatForever(SKAction.sequence([SKAction.run {
+            self.spawnenemy()
+            } , SKAction.wait(forDuration: 5.0)]))
+        self.run(createenemies)
+        //health pack spawning
+        let createpowerups = SKAction.repeatForever(SKAction.sequence([SKAction.run {
+            self.spawnhealthkit()
+            } , SKAction.wait(forDuration: 10.0)]))
+        self.run(createpowerups)
+        
+        
+        
+    }
+    func setButtonPositions() {
         let deviceWidth = UIScreen.main.bounds.width
         let deviceHeight = UIScreen.main.bounds.height
         if UIDevice.current.userInterfaceIdiom == .phone {
@@ -90,66 +145,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
             
             
         }
-        camera?.addChild(joystick)
-        camera?.addChild(ship.healthbar)
-        // Show fire effect on ship
-        
-        fireeffect1.position = CGPoint(x: -25, y: -45)
-        fireeffect2.position = CGPoint(x: 25, y: -45)
-        fireeffect1.zRotation = CGFloat.pi
-        fireeffect2.zRotation = CGFloat.pi
-        fireeffect1.isHidden = true
-        fireeffect2.isHidden = true
-        ship.addChild(fireeffect1)
-        ship.addChild(fireeffect2)
-        //Joystick movement handlers
-        joystick.on(.move) { [unowned self] joystick in
-            self.isTracking = true
-            self.fireeffect1.isHidden = false
-            self.fireeffect2.isHidden = false
-        }
-        joystick.on(.end) { [unowned self] joystick in
-            self.isTracking = false
-            self.fireeffect1.isHidden = true
-            self.fireeffect2.isHidden = true
-        }
-        
-        physicsWorld.contactDelegate = self
-        self.addChild(ship)
-        camera?.addChild(firebutton)
-        firebutton.addChild(firelabel)
-        // Initially spawn enemies
-        for _ in 0 ..< 5 {
-            spawnenemy()
-        }
-        //Enemy spawning
-        let createenemies = SKAction.repeatForever(SKAction.sequence([SKAction.run {
-            self.spawnenemy()
-            } , SKAction.wait(forDuration: 5.0)]))
-        self.run(createenemies)
-        //health pack spawning
-        let createpowerups = SKAction.repeatForever(SKAction.sequence([SKAction.run {
-            self.spawnhealthkit()
-            } , SKAction.wait(forDuration: 10.0)]))
-        self.run(createpowerups)
-        
-        //Creating rectangle level border
-        let rect = CGRect(origin: CGPoint(x: -2500, y: -2500), size: CGSize(width: 5000, height: 5000))
-        let borderindicator = SKShapeNode(rect: rect)
-        borderindicator.lineWidth = 50
-        borderindicator.alpha = 0.5
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: rect)
-        self.addChild(borderindicator)
         
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //        guard let touchlocation = touches.first?.location(in: (camera)!) else {return}
-        //        if firebutton.contains(touchlocation) {
-        //            ship.firebullet(imagename: "laserBlue01.png")
-        //        }
-        
-    }
-    
     func canSpawn(position: CGPoint) -> Bool {
         for node in self.children {
             let xDist = position.x - node.position.x
@@ -158,11 +155,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
             switch node.name {
             case "meteor", "enemy" :
                 if Dist < 200 {
-                 return false
+                    return false
                 }
             case "player" :
                 if Dist < 300 {
-                return false
+                    return false
                 }
             default: break
             }
@@ -175,9 +172,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
         enemy.position = CGPoint(x: Int.random(in: -2500 ... 2500), y: Int.random(in: -2500 ... 2500))
         enemy.healthbar.position = CGPoint(x: enemy.position.x-(enemy.size.width/2), y: enemy.position.y-60)
         if canSpawn(position: enemy.position) {
-        self.addChild(enemy)
-        self.addChild(enemy.healthbar)
-        self.enemylist.append(enemy)
+            self.addChild(enemy)
+            self.addChild(enemy.healthbar)
+            self.enemylist.append(enemy)
         } else {
             spawnenemy()
         }
@@ -191,8 +188,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
             healthkit.xScale = 3
             healthkit.yScale = 3
             if canSpawn(position: healthkit.position) {
-            self.healthkitlist.append(healthkit)
-            self.addChild(healthkit)
+                self.healthkitlist.append(healthkit)
+                self.addChild(healthkit)
             } else {
                 spawnhealthkit()
             }
@@ -279,6 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
             fireeffect1.alpha = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y)) / 42
             fireeffect2.alpha = sqrt((velocity.x * velocity.x) + (velocity.y * velocity.y)) / 42
         }
+        
         if firebutton.isPressed {
             if !ship.isShooting {
                 ship.isShooting = true
@@ -288,7 +286,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
                 ship.isShooting = false
             }
         }
+        
         camera?.position = ship.position
+        
         for enemy in enemylist {
             // set healthbar position to follow enemy sprite
             enemy.healthbar.position = CGPoint(x: enemy.position.x - (enemy.size.width/2), y: enemy.position.y-60)
