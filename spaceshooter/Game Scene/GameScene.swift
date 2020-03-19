@@ -88,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
         physicsWorld.contactDelegate = self
         
         // Initially spawn enemies
-        for _ in 0 ..< 7 {
+        for _ in 0 ..< 5 {
             spawnenemy()
         }
         //Enemy spawning
@@ -262,7 +262,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate  {
         //Checks if player takes health kit
         for (i, healthkit) in healthkitlist.enumerated().reversed() {
             if healthkit.contains(ship.position) {
-                ship.heal(damage: 20)
+                ship.heal(damage: 30)
                 healthkitlist.remove(at: i)
                 healthkit.removeFromParent()
             }
